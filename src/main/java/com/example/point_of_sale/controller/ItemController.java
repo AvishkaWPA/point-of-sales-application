@@ -1,11 +1,10 @@
 package com.example.point_of_sale.controller;
 
+import com.example.point_of_sale.dto.ItemDTO;
+import com.example.point_of_sale.dto.request.ItemSaveRequestDTO;
 import com.example.point_of_sale.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/item")
@@ -16,5 +15,9 @@ public class ItemController {
     private ItemService itemService;
 
     @PostMapping(path = "/save")
-    public String 
+    public String SaveItem(@RequestBody ItemSaveRequestDTO itemSaveRequestDTO) {
+        String response = itemService.saveItem(itemSaveRequestDTO);
+        return response;
+
+    }
 }
