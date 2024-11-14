@@ -6,6 +6,7 @@ import com.example.point_of_sale.entity.Item;
 import com.example.point_of_sale.entity.enums.MeasuringUnitType;
 import com.example.point_of_sale.repo.ItemRepo;
 import com.example.point_of_sale.service.ItemService;
+import com.example.point_of_sale.util.mappers.ItemMapper;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ItemServiceIMPL implements ItemService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ItemMapper itemMapper;
 
     @Override
     public String saveItem(ItemSaveRequestDTO itemSaveRequestDTO) {
@@ -54,6 +58,17 @@ public class ItemServiceIMPL implements ItemService {
         List<Item> items = itemRepo.findAllByItemNameEqualsAndActiveStateEquals(itemName,true);
         if(!items.isEmpty()){
             List<ItemGetResponseDTO> itemsDTOS = modelMapper.map(items,new TypeToken<List<ItemGetResponseDTO>>(){}.getType());
+            return itemsDTOS;
+        }else {
+            throw new RuntimeException("Not found!");
+        }
+    }
+
+    @Override
+    public List<ItemGetResponseDTO> getItemByNameAndStatusWithMapstruct(String itemName) {
+        List<Item> items = itemRepo.findAllByItemNameEqualsAndActiveStateEquals(itemName,true);
+        if(!items.isEmpty()){
+            List<ItemGetResponseDTO> itemsDTOS = itemMapper.entityListToDTOList(items);
             return itemsDTOS;
         }else {
             throw new RuntimeException("Not found!");
