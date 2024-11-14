@@ -3,7 +3,10 @@ package com.example.point_of_sale.controller;
 
 import com.example.point_of_sale.dto.ProductDTO;
 import com.example.point_of_sale.service.ProductService;
+import com.example.point_of_sale.util.mappers.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,8 +17,8 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("save")
-    public String saveProduct(@RequestBody  ProductDTO productDTO){
+    public ResponseEntity<StandardResponse> saveProduct(@RequestBody  ProductDTO productDTO){
         productService.saveProduct(productDTO);
-        return productDTO.getProductName();
+        return new ResponseEntity<StandardResponse>(new StandardResponse(201,"Success",null), HttpStatus.CREATED);
     }
 }

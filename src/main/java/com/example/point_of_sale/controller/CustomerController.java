@@ -5,7 +5,10 @@ import com.example.point_of_sale.dto.request.CustomerUpdateDTO;
 import com.example.point_of_sale.entity.Customer;
 import com.example.point_of_sale.service.CustomerService;
 import com.example.point_of_sale.service.impl.CustomerServiceIMPL;
+import com.example.point_of_sale.util.mappers.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,39 +22,39 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/save")
-    public String saveCustomer(@RequestBody CustomerDTO customerDTO){
+    public ResponseEntity<StandardResponse> saveCustomer(@RequestBody CustomerDTO customerDTO){
         customerService.saveCustomer(customerDTO);
-        return "saved";
+        return new ResponseEntity<StandardResponse>(new StandardResponse(201,"Success",null), HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
-    public String updateCustomer(@RequestBody CustomerUpdateDTO customerUpdateDTO){
+    public ResponseEntity<StandardResponse> updateCustomer(@RequestBody CustomerUpdateDTO customerUpdateDTO){
         customerService.updateCustomer(customerUpdateDTO);
-        return "updated";
+        return new ResponseEntity<StandardResponse>(new StandardResponse(200,"Success",null),HttpStatus.OK);
     }
 
     @GetMapping(path = "/get-by-id", params = "id")
-    public CustomerDTO getCustomerById(@RequestParam(value = "id") int customerId){
+    public ResponseEntity<StandardResponse> getCustomerById(@RequestParam(value = "id") int customerId){
         CustomerDTO customerDTO = customerService.getCustomerById(customerId);
-        return customerDTO;
+        return new ResponseEntity<StandardResponse>(new StandardResponse(200,"Success",customerDTO),HttpStatus.OK);
     }
 
     @GetMapping("/get-all-customers")
-    public List<CustomerDTO> getAllCustomers(){
+    public ResponseEntity<StandardResponse> getAllCustomers(){
         List<CustomerDTO> allCustomers = customerService.getAllCustomers();
-        return allCustomers;
+        return new ResponseEntity<StandardResponse>(new StandardResponse(200,"Success",allCustomers),HttpStatus.OK);
     }
 
     @DeleteMapping(path = "delete-customer/{id}")
-    public String deleteCustomer(@PathVariable(value = "id") int customerId){
+    public ResponseEntity<StandardResponse> deleteCustomer(@PathVariable(value = "id") int customerId){
         String deleted = customerService.deleteCustomer(customerId);
-        return deleted;
+        return new ResponseEntity<StandardResponse>(new StandardResponse(200,"Success",deleted),HttpStatus.OK);
     }
 
     @GetMapping(value = "/get-all-by-active-state/{state}")
-    public List<CustomerDTO> getAllCustomerByActiveState(@PathVariable(value = "state") boolean state){
+    public ResponseEntity<StandardResponse> getAllCustomerByActiveState(@PathVariable(value = "state") boolean state){
         List<CustomerDTO> allCustomersByActiveState = customerService.getAllCustomerByActiveState(state);
-        return allCustomersByActiveState;
+        return new ResponseEntity<StandardResponse>(new StandardResponse(200,"Success",allCustomersByActiveState),HttpStatus.OK);
     }
 
 
