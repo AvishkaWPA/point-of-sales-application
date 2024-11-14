@@ -1,14 +1,18 @@
 package com.example.point_of_sale.service.impl;
 
 import com.example.point_of_sale.dto.request.ItemSaveRequestDTO;
+import com.example.point_of_sale.dto.response.ItemGetResponseDTO;
 import com.example.point_of_sale.entity.Item;
 import com.example.point_of_sale.entity.enums.MeasuringUnitType;
 import com.example.point_of_sale.repo.ItemRepo;
 import com.example.point_of_sale.service.ItemService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ItemServiceIMPL implements ItemService {
@@ -41,6 +45,18 @@ public class ItemServiceIMPL implements ItemService {
 
         }else {
             throw new DuplicateKeyException("Already existed");
+        }
+    }
+
+    @Override
+    public List<ItemGetResponseDTO> getItemByNameAndStatus(String itemName) {
+
+        List<Item> items = itemRepo.findAllByItemNameEqualsAndActiveStateEquals(itemName,true);
+        if(!items.isEmpty()){
+            List<ItemGetResponseDTO> itemsDTOS = modelMapper.map(items,new TypeToken<List<ItemGetResponseDTO>>(){}.getType());
+            return itemsDTOS;
+        }else {
+            throw new RuntimeException("Not found!");
         }
     }
 

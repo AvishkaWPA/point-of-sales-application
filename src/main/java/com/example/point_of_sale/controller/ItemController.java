@@ -2,9 +2,12 @@ package com.example.point_of_sale.controller;
 
 import com.example.point_of_sale.dto.ItemDTO;
 import com.example.point_of_sale.dto.request.ItemSaveRequestDTO;
+import com.example.point_of_sale.dto.response.ItemGetResponseDTO;
 import com.example.point_of_sale.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/item")
@@ -18,6 +21,14 @@ public class ItemController {
     public String SaveItem(@RequestBody ItemSaveRequestDTO itemSaveRequestDTO) {
         String response = itemService.saveItem(itemSaveRequestDTO);
         return response;
+    }
 
+    @GetMapping(
+            path = "/getByName",
+            params = "name"
+    )
+    public List<ItemGetResponseDTO> getItemByNameAndStatus(@RequestParam(value = "name") String itemName){
+        List<ItemGetResponseDTO> itemDTOS = itemService.getItemByNameAndStatus(itemName);
+        return itemDTOS;
     }
 }
