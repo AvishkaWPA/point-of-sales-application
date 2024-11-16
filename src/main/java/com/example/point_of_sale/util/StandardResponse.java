@@ -1,4 +1,4 @@
-package com.example.point_of_sale.util.mappers;
+package com.example.point_of_sale.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
