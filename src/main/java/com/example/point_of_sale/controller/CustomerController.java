@@ -2,10 +2,8 @@ package com.example.point_of_sale.controller;
 
 import com.example.point_of_sale.dto.CustomerDTO;
 import com.example.point_of_sale.dto.request.CustomerUpdateDTO;
-import com.example.point_of_sale.entity.Customer;
 import com.example.point_of_sale.service.CustomerService;
-import com.example.point_of_sale.service.impl.CustomerServiceIMPL;
-import com.example.point_of_sale.util.mappers.StandardResponse;
+import com.example.point_of_sale.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

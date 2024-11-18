@@ -3,7 +3,7 @@ package com.example.point_of_sale.controller;
 
 import com.example.point_of_sale.dto.ProductDTO;
 import com.example.point_of_sale.service.ProductService;
-import com.example.point_of_sale.util.mappers.StandardResponse;
+import com.example.point_of_sale.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -9,7 +9,7 @@ public interface CustomerService {
 
     List<CustomerDTO> getAllCustomerByActiveState(boolean state);
 
-    public String saveCustomer(CustomerDTO customerDTO);
+    public void saveCustomer(CustomerDTO customerDTO);
 
     void updateCustomer(CustomerUpdateDTO customerUpdateDTO);
 

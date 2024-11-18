@@ -3,7 +3,6 @@ package com.example.point_of_sale.service.impl;
 import com.example.point_of_sale.dto.request.ItemSaveRequestDTO;
 import com.example.point_of_sale.dto.response.ItemGetResponseDTO;
 import com.example.point_of_sale.entity.Item;
-import com.example.point_of_sale.entity.enums.MeasuringUnitType;
 import com.example.point_of_sale.repo.ItemRepo;
 import com.example.point_of_sale.service.ItemService;
 import com.example.point_of_sale.util.mappers.ItemMapper;
