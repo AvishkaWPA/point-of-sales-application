@@ -19,6 +19,6 @@ public class ProductController {
     @PostMapping("save")
     public ResponseEntity<StandardResponse> saveProduct(@RequestBody  ProductDTO productDTO){
         productService.saveProduct(productDTO);
-        return new ResponseEntity<StandardResponse>(new StandardResponse(201,"Success",null), HttpStatus.CREATED);
+        return new ResponseEntity<StandardResponse>(new StandardResponse(201,"Success!",null), HttpStatus.CREATED);
     }
 }
